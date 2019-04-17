@@ -12,7 +12,6 @@ def delete_hdfs_file(hdfs_path):
 	return client.delete(hdfs_path)
 
 
-
 if __name__ == '__main__':
 	# delete_succeed = delete_hdfs_file('/a.txt')
 	# print(delete_succeed)
