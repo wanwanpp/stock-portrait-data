@@ -11,12 +11,14 @@ cursor = db.cursor()
 
 execute_count = 0
 
+
 def get_trade_calendar():
 	trade_cal = pro.trade_cal(exchange='', start_date='20160101')
 	return trade_cal
 
+
 def create_table():
-	create_sql ="""CREATE TABLE trade_calendar (id int not null primary key auto_increment, exchange  varchar(20), cal_date  varchar(50), is_open int )"""
+	create_sql = """CREATE TABLE trade_calendar (id int not null primary key auto_increment, exchange  varchar(20), cal_date  varchar(50), is_open int )"""
 	print(cursor.execute(create_sql))
 
 
@@ -26,11 +28,11 @@ def insert_data(exchange=None, cal_date=None, is_open=None):
 	       cal_date, is_open) \
 	       VALUES ('%s', '%s',  %s)" % \
 		  (exchange, cal_date, is_open)
-	
+
 	try:
 		cursor.execute(sql)
 		db.commit()
-		execute_count = execute_count+1
+		execute_count = execute_count + 1
 		print(execute_count)
 	except:
 		db.rollback()
@@ -42,16 +44,21 @@ def select_isopen_by_caldate(cal_date):
 	result = cursor.fetchall()
 	return result[0][0]
 
+
+def get_trade_calendar_and_insert():
+	trade_cal = get_trade_calendar()
+	print(trade_cal.shape)
+	for index, row in trade_cal.iterrows():
+		insert_data(row[-3], row[-2], row[-1])
+	print(execute_count)
+	db.close()
+
+
 if __name__ == '__main__':
 
 	# create_table()
 
-	# trade_cal = get_trade_calendar()
-	# print(trade_cal.shape)
-	# for index,row in trade_cal.iterrows():
-	# 	insert_data(row[-3],row[-2],row[-1])
-	# print(execute_count)
-	# db.close()
+	get_trade_calendar_and_insert()
 
-	result = select_isopen_by_caldate('20190422')
-	print(result==1)
+	# result = select_isopen_by_caldate('20190422')
+	# print(result == 1)
