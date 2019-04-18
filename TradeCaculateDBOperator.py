@@ -51,7 +51,7 @@ def get_trade_calendar_and_insert():
 	for index, row in trade_cal.iterrows():
 		insert_data(row[-3], row[-2], row[-1])
 	print(execute_count)
-	db.close()
+	# db.close()
 
 
 if __name__ == '__main__':

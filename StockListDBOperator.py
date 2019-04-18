@@ -40,7 +40,7 @@ def get_stock_basic_and_insert():
 	for index, row in stock_basic.iterrows():
 		insert_data(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
 	print(execute_count)
-	db.close()
+	# db.close()
 
 
 if __name__ == '__main__':

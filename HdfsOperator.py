@@ -22,5 +22,5 @@ def read_csv_from_hdfs(hdfs_path):
 
 
 def append_csv_to_hdfs_file(hdfs_path, data):
-	with client.write(hdfs_path, encoding='utf-8') as writer:
+	with client.write(hdfs_path, encoding='utf-8', append=True) as writer:
 		data.to_csv(writer, encoding='utf-8', index=False, header=False, mode='a')
