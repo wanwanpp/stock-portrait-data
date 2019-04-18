@@ -3,10 +3,9 @@ import logging
 import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from DailyTrade import get_oneday_trade
-from HdfsOperator import append_csv_to_hdfs_file
-import TradeCaculateDBOperator as trade_cal_db
-import StockListDBOperator as stock_list_db
+from dao.DailyTrade import get_oneday_trade
+from dao.HdfsOperator import append_csv_to_hdfs_file
+from dao import TradeCaculateDBOperator as trade_cal_db, StockListDBOperator as stock_list_db
 from util import MysqlUtil
 
 daily_trade_file_path = '/stock_portrait/day_trade_data.csv'
@@ -47,7 +46,7 @@ def update_daily_trade():
 		today_trade_data = get_oneday_trade(now)
 		# 3. 将数据追加到Hdfs文件中
 		append_csv_to_hdfs_file(daily_trade_file_path, today_trade_data)
-		logging.info("append to " + daily_trade_file_path + ', data info :', today_trade_data.info())
+		logging.info("append to " + daily_trade_file_path + ', data info :' + today_trade_data.info())
 	else:
 		logging.info("today is not trading")
 
