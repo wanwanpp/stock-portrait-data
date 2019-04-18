@@ -1,7 +1,10 @@
 import time
 import tushare as ts
+from tushare.pro import client
 
-pro = ts.pro_api('4d7357aee9bef99c3b5d61f37a3451535f4cdd6a63fe45e3b0080c4e')
+# pro = ts.pro_api('4d7357aee9bef99c3b5d61f37a3451535f4cdd6a63fe45e3b0080c4e')
+# 设置timeout更长
+pro = client.DataApi('4d7357aee9bef99c3b5d61f37a3451535f4cdd6a63fe45e3b0080c4e', timeout=1000)
 
 
 def get_daily_trade_to_csv(start_date='', end_date='', file_save_path=''):

@@ -8,7 +8,15 @@ client = Client("http://172.23.253.80:50070/", root="/", timeout=10000, session=
 
 
 def upload(hdfs_path='', local_file_path='', cleanup=True):
-	return client.upload(hdfs_path, local_file_path, cleanup)
+	"""
+
+	:param hdfs_path:
+	:param local_file_path:
+	:param cleanup:
+	:param overwrite: 当文件存在时，覆盖掉
+	:return:
+	"""
+	return client.upload(hdfs_path, local_file_path, cleanup, overwrite=True)
 
 
 def delete_hdfs_file(hdfs_path):
